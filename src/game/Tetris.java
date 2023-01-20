@@ -82,7 +82,7 @@ class Tetris extends JPanel {
     };
 
     private final Color[] tetraminoColors = {
-            Color.cyan, Color.blue, Color.orange, Color.yellow, Color.green, Color.pink, Color.red
+            Color.cyan, Color.blue, Color.orange, Color.yellow, Color.green, Color.magenta, Color.red
     };
 
     private Point pieceOrigin;
@@ -111,7 +111,7 @@ class Tetris extends JPanel {
 
     // Put a new, random piece into the dropping position
     public void newPiece() {
-        pieceOrigin = new Point(5, 2);
+        pieceOrigin = new Point(5, 0);
         rotation = 0;
         if (nextPieces.isEmpty()) {
             Collections.addAll(nextPieces, 0, 1, 2, 3, 4, 5, 6);
@@ -263,7 +263,6 @@ class Tetris extends JPanel {
                     case KeyEvent.VK_RIGHT -> game.move(+1);
                     case KeyEvent.VK_SPACE -> {
                         game.dropDown();
-                        game.score += 1;
                     }
                 }
             }
