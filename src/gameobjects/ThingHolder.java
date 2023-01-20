@@ -73,8 +73,17 @@ public class ThingHolder extends Thing implements java.io.Serializable {
             if (t.getContainer() instanceof ContainerThing) {
                 containerName = " [ in " + t.getContainer().getName() + " ]";
             }
+            if (t instanceof Treasure && !(t.getContainer() instanceof Room))
+            {
+                int value = ((Treasure) t).getValue();
+                String coinsCoin;
+                coinsCoin = (value > 1) ? ("coins"):("coin");
+                thingStr += t.getName() + containerName + ": "+value + " " + coinsCoin + "\n";
+            }else
+            {
+                thingStr += t.getName() + containerName + "\n";
+            }
 
-            thingStr += t.getName() + containerName + "\n";
             container = toContainerThing(t);
             if ((container != null) && (container.isOpen())) {
                 if (container.numberOfThings() > 0) {

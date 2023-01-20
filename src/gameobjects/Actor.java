@@ -3,11 +3,13 @@ package gameobjects;
 import globals.Dir;
 import globals.ThingAndThingHolder;
 
+import java.util.concurrent.atomic.AtomicReference;
+
 public class Actor extends ThingHolder implements java.io.Serializable {
 
     //  private Room location; // the Room where the Person is at present
     public Actor(String aName, String aDescription, ThingList tl, Room aRoom) {
-        super(aName, aDescription, tl, aRoom); // init super class       
+        super(aName, aDescription, tl, aRoom); // init super class
     }
 
     public void setLocation(Room aRoom) {
@@ -24,12 +26,21 @@ public class Actor extends ThingHolder implements java.io.Serializable {
 
     public String inventory() {
         String s;
+
         s = describeThings();
+
         if (s.isEmpty()) {
             s = "nothing";
         }
-        return "You have " + s;
+        if (getName().equals("player"))
+        {
+            return "You have \n" + s;
+        } else{
+            return getName() + " has \n" + s;
+        }
     }
+
+
 
     // is the thing found in any list (including 'nested' lists
     // either in the player's inventory or in the current location?
@@ -43,6 +54,9 @@ public class Actor extends ThingHolder implements java.io.Serializable {
         }
         return t_th;
     }
+
+
+
 
     public ThingAndThingHolder isThingInInventory(String obname) {
         return this.findThing(obname);
@@ -180,7 +194,7 @@ public class Actor extends ThingHolder implements java.io.Serializable {
         ThingAndThingHolder cont_th;
         ContainerThing container;
 
-        t_th = isThingInInventory(obname); // is it in player's inventory?        
+        t_th = isThingInInventory(obname); // is it in player's inventory?
         cont_th = isThingHere(containername); // is it in room or inventory?
 
         if (t_th == null) {
@@ -215,7 +229,7 @@ public class Actor extends ThingHolder implements java.io.Serializable {
         Thing t;
         ThingList tl;
         ThingHolder th;
-        
+
         t_th = isThingHere(obname);
         if (t_th == null) {
             s = "Can't see " + obname + " here.";
@@ -223,6 +237,7 @@ public class Actor extends ThingHolder implements java.io.Serializable {
             t = t_th.getThing();
             tl = t_th.getList();
             th = t_th.getThingHolder();
+
             if (tl == this.getThings()) {
                 s = "You already have the " + obname;
             } else {
@@ -258,7 +273,7 @@ public class Actor extends ThingHolder implements java.io.Serializable {
     }
 
     public Boolean moveTo(Dir dir) {
-        Room r; 
+        Room r;
         Room exit;
         Boolean moved = false;
 
