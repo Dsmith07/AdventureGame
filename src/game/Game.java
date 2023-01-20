@@ -1,5 +1,7 @@
 package game;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.*;     // required for ArrayList
 import gameobjects.Actor;
 import gameobjects.ContainerThing;
@@ -8,12 +10,15 @@ import gameobjects.Thing;
 import gameobjects.ThingList;
 import gameobjects.Treasure;
 import globals.Dir;
+import globals.ThingAndThingHolder;
+
+import javax.swing.*;
 
 public class Game implements java.io.Serializable {
 
     private ArrayList<Room> map; // the map - an ArrayList of Rooms    
-    private Actor player;  // the player - provides 'first person perspective'
-    private Actor trader;
+    public Actor player;  // the player - provides 'first person perspective'
+    public Actor trader;
 
     public Game() {
         Parser.initVocab();
@@ -42,12 +47,9 @@ public class Game implements java.io.Serializable {
         Room dungeon = new Room();
         Room sack = new Room();
         Room chest = new Room();
-        /*
-            TODO: Add parser for 'Play' command
-            TODO: Connect Tetris with relic when Play is ran on relic
-         */
-        ContainerThing gameBoy = new ContainerThing("relic", "a strange device with with a florencent hum", true, true, true, playerList, player);
 
+        Treasure gameBoy = new Treasure("relic", "a strange device with with a fluorescent hum, it seems like you can play this device", 50, trader);
+        Treasure traderTest = new Treasure("lol", "a test for trader items",100, trader);
         ContainerThing sackCont = new ContainerThing("sack", "a smelly old sack", true, true, true, false, sackList, trollRoom);
         Treasure inSack = new Treasure("bone", "a crisp bone", 10, sack);
 
@@ -61,7 +63,8 @@ public class Game implements java.io.Serializable {
         trollRoomList.add(new ContainerThing("bowl", "a brass bowl", true, true, false, true, new ThingList("bowlList"), trollRoom));
         trollRoomList.add(new ContainerThing("box", "a cardboard box", true, true, true, true, new ThingList("boxList"), trollRoom));
 
-        playerList.add(gameBoy);
+        traderList.add(gameBoy);
+        traderList.add(traderTest);
 
         chestList.add(inChest);
 
@@ -109,13 +112,45 @@ public class Game implements java.io.Serializable {
         return player.putInto(obname, containername);
     }
 
-    /*
+
     public String playerTalkTo(String npc)
     {
+        String s;
+        if (trader.getName().equals(npc))
+        {
+            System.out.println("Ah hello see my wares:");
+            s = "I hope you enjoy what you see";
+            showInventory(npc);
+            return s;
 
+        } else {
+            s = "(npc not implemented yet)";
+            return s;
+        }
     }
 
-     */
+
+    public String  play (String obname)
+    {
+
+        String s;
+        ThingAndThingHolder t_th = player.isThingInInventory(obname);
+        if (t_th == null)
+        {
+            s = "you must buy the " + obname +" from the trader first";
+            return s;
+        }
+        String[] args = {"lol"};
+        if (obname.equals("relic"))
+        {
+            Tetris.main(args);
+            s = "the game boots up";
+            return s;
+        } else {
+            s = "you must buy the " + obname +" from the trader first";
+            return s;
+        }
+    }
 
     public String openOb(String obname) {
         return player.openOb(obname);
@@ -191,6 +226,39 @@ public class Game implements java.io.Serializable {
     void showInventory() {
         showStr(player.inventory());
     }
+    void showInventory(String actorName) {
+        if (actorName.equals(trader.getName()))
+        {
+            showStr(trader.inventory());
+        }
+    }
+
+    String buy(String obname, String npc)
+    {
+        String s = "ok";
+        ThingAndThingHolder t_th;
+        ThingList tl;
+        Thing t;
+        if (npc.equals(trader.getName()))
+        {
+            t_th = trader.isThingHere(obname);
+            t = t_th.getThing();
+            if (t.isTakable())
+            {
+                trader.drop(obname);
+                player.take(obname);
+                s = "you buy the " + obname + " from the " + trader.getName();
+                return s;
+            } else {
+                return s;
+            }
+
+        } else {
+            s = "(npc not implemented yet)";
+            return s;
+        }
+    }
+
 
     String lookAtOb(String obname) {
         return player.lookAt(obname);

@@ -1,16 +1,28 @@
 package game;
 
+/*********************************************************************
+ ALL CREDIT GOES TO BENJAMIN BOWMAN FOR THE TETRIS CODE
+ **********************************************************************/
+
+
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Point;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import java.util.Scanner;
+import javax.swing.*;
 
 class Tetris extends JPanel {
+
+    //public Tetris()
+
+
     private static final long serialVersionUID = -8715353373678321308L;
     private final Point[][][] Tetraminos = {
             // I-Piece
@@ -78,11 +90,12 @@ class Tetris extends JPanel {
     private int rotation;
     private ArrayList<Integer> nextPieces = new ArrayList<Integer>();
 
-    private long score;
+    public long score;
+    int numClears = 0;
     private Color[][] well;
 
     // Creates a border around the well and initializes the dropping piece
-    private void init() {
+    public void init() {
         well = new Color[12][24];
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 23; j++) {
@@ -171,7 +184,6 @@ class Tetris extends JPanel {
     // the number of simultaneously cleared rows.
     public void clearRows() {
         boolean gap;
-        int numClears = 0;
         for (int j = 21; j > 0; j--) {
             gap = false;
             for (int i = 1; i < 11; i++) {
@@ -182,17 +194,19 @@ class Tetris extends JPanel {
             }
             if (!gap) {
                 deleteRow(j);
+                if (numClears == 0)
+                {
+                    score += 100;
+                }
+                else {
+                    score += (numClears * 100L);
+                }
                 j += 1;
                 numClears += 1;
             }
         }
 
-        switch (numClears) {
-            case 1 -> score += 100;
-            case 2 -> score += 300;
-            case 3 -> score += 500;
-            case 4 -> score += 800;
-        }
+
     }
 
     // Draw the falling piece
@@ -227,11 +241,11 @@ class Tetris extends JPanel {
 
     public static void main(String[] args) {
         JFrame f = new JFrame("Tetris");
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         f.setSize(12*26+10, 26*23+25);
+        final Tetris game = new Tetris();
         f.setVisible(true);
 
-        final Tetris game = new Tetris();
         game.init();
         f.add(game);
 
@@ -241,6 +255,7 @@ class Tetris extends JPanel {
             }
 
             public void keyPressed(KeyEvent e) {
+
                 switch (e.getKeyCode()) {
                     case KeyEvent.VK_UP -> game.rotate(-1);
                     case KeyEvent.VK_DOWN -> game.rotate(+1);

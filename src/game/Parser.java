@@ -39,11 +39,18 @@ public class Parser {
         vocab.put("tree", WT.NOUN);
         vocab.put("wombat", WT.NOUN);
         vocab.put("test", WT.VERB);
+        vocab.put("buy", WT.VERB);
+        vocab.put("from", WT.PREPOSITION);
+        vocab.put("trader", WT.NOUN);
+        vocab.put("shop", WT.VERB);
+        vocab.put("lol", WT.NOUN);
         vocab.put("get", WT.VERB);
         vocab.put("i", WT.VERB);
         vocab.put("inventory", WT.VERB);
         vocab.put("play", WT.VERB);
         vocab.put("take", WT.VERB);
+        vocab.put("talk", WT.VERB);
+        vocab.put("to", WT.PREPOSITION);
         vocab.put("drop", WT.VERB);
         vocab.put("put", WT.VERB);
         vocab.put("l", WT.VERB);
@@ -87,6 +94,12 @@ public class Parser {
                 case "putinto":
                     msg = AdventureGame.game.putObInContainer(wt2.getWord(), wt4.getWord());
                     break;
+                    /*
+                    TODO: ADD BUY COMMAND HERE!!!!
+                     */
+                case "buyfrom":
+                    msg = AdventureGame.game.buy(wt2.getWord(), wt4.getWord());
+                    break;
                 default:
                     msg = "I don't know how to " + wt.getWord() + " " + wt2.getWord() + " " + wt3.getWord() + " " + wt4.getWord() + "!";
                     break;
@@ -113,6 +126,9 @@ public class Parser {
                     break;
                 case "lookin":
                     msg = AdventureGame.game.lookInOb(wt3.getWord());
+                    break;
+                case "talkto":
+                    msg = AdventureGame.game.playerTalkTo(wt3.getWord());
                     break;
                 default:
                     msg = "I don't know how to " + wt.getWord() + " " + wt2.getWord() + " " + wt3.getWord() + "!";
@@ -145,6 +161,9 @@ public class Parser {
                     break;
                 case "close":
                     msg = AdventureGame.game.closeOb(wt2.getWord());
+                    break;
+                case "play":
+                    msg = AdventureGame.game.play(wt2.getWord());
                     break;
                 default:
                     msg += " (not yet implemented)";

@@ -1,6 +1,8 @@
 package game;
 
 import game.Game;
+import gameobjects.Treasure;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -11,9 +13,10 @@ import java.io.ObjectOutputStream;
 
 public class AdventureGame {
 
-    static Game game;
+    public static Game game;
+    public static Treasure treasure;
 
-    private static void saveGame() {
+    public static void saveGame() {
         try {
             FileOutputStream fos = new FileOutputStream("Adv.sav");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -27,7 +30,7 @@ public class AdventureGame {
         }
     }
 
-    private static void loadGame() {
+    public static void loadGame() {
         try {
             FileInputStream fis = new FileInputStream("Adv.sav");
             ObjectInputStream ois = new ObjectInputStream(fis);
