@@ -1,12 +1,13 @@
 package gameobjects;
 
+import game.AdventureGame;
 import globals.Dir;
 import globals.ThingAndThingHolder;
 
 import java.util.concurrent.atomic.AtomicReference;
 
 public class Actor extends ThingHolder implements java.io.Serializable {
-
+    public int coins = 0;
     //  private Room location; // the Room where the Person is at present
     public Actor(String aName, String aDescription, ThingList tl, Room aRoom) {
         super(aName, aDescription, tl, aRoom); // init super class
@@ -23,6 +24,7 @@ public class Actor extends ThingHolder implements java.io.Serializable {
     public String describeLocation() {
         return ((Room) getContainer()).describe();
     }
+
 
     public String inventory() {
         String s;
@@ -230,6 +232,47 @@ public class Actor extends ThingHolder implements java.io.Serializable {
         ThingList tl;
         ThingHolder th;
 
+
+        if (obname.equals("coins"))
+        {
+            t_th = isThingInRoom(obname);
+            if (t_th == null) {
+                s = "Can't see " + obname + " here.";
+                return s;
+            } else {
+                t = t_th.getThing();
+                tl = t_th.getList();
+                th = t_th.getThingHolder();
+                if (th instanceof ContainerThing) {
+                     s = "You take the " + obname + " from the " + th.getName();
+                     coins += ((Treasure) t).getValue();
+                     if (AdventureGame.game.player.isThingInInventory(obname) != null)
+                     {
+                         tl.remove(t);
+                         ((Treasure) t).setValue(coins);
+                     } else {
+                         ((Treasure) t).setValue(coins);
+                         transferOb(t, th, this);
+                     }
+
+                     return s;
+
+                } else{
+                    s = obname + " taken!";
+                    coins += ((Treasure) t).getValue();
+                    transferOb(t, th, this);
+                    return s;
+                }
+            }
+
+        }
+
+        if (obname.equals("merchant"))
+        {
+            s = "Cannot take " + obname;
+            return s;
+        }
+
         t_th = isThingHere(obname);
         if (t_th == null) {
             s = "Can't see " + obname + " here.";
@@ -245,7 +288,7 @@ public class Actor extends ThingHolder implements java.io.Serializable {
                     transferOb(t, th, this);
                     if (th instanceof ContainerThing) {
                         s = "You take the " + obname + " from the " + th.getName();
-                    } else {
+                    } else{
                         s = obname + " taken!";
                     }
                 } else {
