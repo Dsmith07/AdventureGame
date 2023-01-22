@@ -16,6 +16,7 @@ public class AdventureGame {
     public static Game game;
     public static Treasure treasure;
 
+
     public static void saveGame() {
         try {
             FileOutputStream fos = new FileOutputStream("Adv.sav");

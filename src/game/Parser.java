@@ -42,6 +42,7 @@ public class Parser {
         vocab.put("buy", WT.VERB);
         vocab.put("from", WT.PREPOSITION);
         vocab.put("trader", WT.NOUN);
+        vocab.put("merchant", WT.NOUN);
         vocab.put("shop", WT.VERB);
         vocab.put("lol", WT.NOUN);
         vocab.put("get", WT.VERB);
@@ -50,6 +51,8 @@ public class Parser {
         vocab.put("play", WT.VERB);
         vocab.put("take", WT.VERB);
         vocab.put("talk", WT.VERB);
+        vocab.put("use", WT.VERB);
+        vocab.put("tetris", WT.NOUN);
         vocab.put("to", WT.PREPOSITION);
         vocab.put("drop", WT.VERB);
         vocab.put("put", WT.VERB);
@@ -59,6 +62,7 @@ public class Parser {
         vocab.put("close", WT.VERB);
         vocab.put("pull", WT.VERB);
         vocab.put("push", WT.VERB);
+        vocab.put("superdupersecretdeveasteregglol", WT.VERB);
         vocab.put("n", WT.VERB);
         vocab.put("s", WT.VERB);
         vocab.put("w", WT.VERB);
@@ -73,6 +77,8 @@ public class Parser {
         vocab.put("in", WT.PREPOSITION);
         vocab.put("into", WT.PREPOSITION);
         vocab.put("at", WT.PREPOSITION);
+        vocab.put("on", WT.PREPOSITION);
+
     }
 
     static String processVerbNounPrepositionNoun(List<WordAndType> command) {
@@ -94,12 +100,15 @@ public class Parser {
                 case "putinto":
                     msg = AdventureGame.game.putObInContainer(wt2.getWord(), wt4.getWord());
                     break;
-                    /*
-                    TODO: ADD BUY COMMAND HERE!!!!
-                     */
                 case "buyfrom":
                     msg = AdventureGame.game.buy(wt2.getWord(), wt4.getWord());
                     break;
+                    /*
+                case "useon":
+                    msg = AdventureGame.game.use(wt2.getWord(), wt4.getWord());
+                    break;
+
+                     */
                 default:
                     msg = "I don't know how to " + wt.getWord() + " " + wt2.getWord() + " " + wt3.getWord() + " " + wt4.getWord() + "!";
                     break;
@@ -207,8 +216,8 @@ public class Parser {
                 case "i":
                     AdventureGame.game.showInventory();
                     break;
-                case "test":
-                    AdventureGame.game.test();
+                case "superdupersecretdeveasteregglol":
+                    AdventureGame.game.easterEgg();
                     break;
                 default:
                     msg = wt.getWord() + " (not yet implemented)";

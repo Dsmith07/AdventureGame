@@ -15,6 +15,9 @@ public class Game implements java.io.Serializable {
     private ArrayList<Room> map; // the map - an ArrayList of Rooms    
     public Actor player;  // the player - provides 'first person perspective'
     public Actor trader;
+    ThingList secretChestList = new ThingList("chestList");
+    Room trollRoom = new Room();
+    Treasure coins3 = new Treasure("coins", "shiny gold coins", 25, trollRoom);
 
     public Game() {
         Parser.initVocab();
@@ -37,7 +40,6 @@ public class Game implements java.io.Serializable {
         //ThingList gameList = new ThingList("gameList");
 
 
-        Room trollRoom = new Room();
         Room forest = new Room();
         Room cave = new Room();
         Room shed = new Room();
@@ -53,7 +55,7 @@ public class Game implements java.io.Serializable {
 
         ContainerThing chestContainer = new ContainerThing("chest", " sparkly, shiny chest", false, true,true, false, chestList, trollRoom);
         Treasure coins1 = new Treasure("coins", "shiny gold coins", 25, chest);
-        Treasure coins3 = new Treasure("coins", "shiny gold coins", 25, trollRoom);
+        //Treasure coins3 = new Treasure("coins", "shiny gold coins", 25, trollRoom);
         Treasure coins2 = new Treasure("coins", "shiny gold coins", 50, chest);
 
         trollRoomList.add(new Treasure("carrot", "It is a very crunchy carrot", 1, trollRoom));
@@ -125,10 +127,17 @@ public class Game implements java.io.Serializable {
         {
             if (trader.getLocation() == player.getLocation())
             {
-                System.out.println("Ah hello see my wares:");
-                s = "I hope you enjoy what you see";
-                showInventory(npc);
-                return s;
+                if (!trader.inventory().contains("nothing"))
+                {
+                    System.out.println("Ah hello see my wares:");
+                    s = "I hope you enjoy what you see";
+                    showInventory(npc);
+                    return s;
+                } else {
+                    s = "you have bought all of my items. I must restock";
+                    return s;
+                }
+
             } else {
                 s = "Cannot see trader here";
                 return s;
@@ -342,31 +351,28 @@ public class Game implements java.io.Serializable {
         return s;
     }
 
-    // Test..... BEGIN
-    void showTest(String s) {
-        showStr("> " + s);
-        showStr(runCommand(s));
 
+    public void easterEgg()
+    {
+        String s;
+        /*
+        ContainerThing secretChest = new ContainerThing("secret_chest", "a super secret chest maybe containing secrets", trollRoom)
+       trollRoom.add();
+
+         */
+
+        if (player.containsThing(coins3))
+        {
+            coins3.setValue(9999);
+            player.coins += 9999;
+            s = "the super secret easter egg gods have added 9999 coins to your inventory go check!";
+        } else {
+            coins3.setValue(9999);
+            s = "the super secret easter egg gods have added 9999 coins to the " + coins3.getContainer().getName() + " go check!";
+        }
+        System.out.println(s);
     }
 
-    void test() {
-        // utility method to let me try out bits of code while developing the game            
-        showStr("---BEGIN TEST---");
-        //  showThingsInRoom(); // this works ok when no objects are in containers
-        showTest("get carrot");
-        showTest("get bowl");
-        showTest("get sack");
-        showTest("get box");
-        showTest("put carrot in bowl");
-        showTest("put bowl in sack");
-        showTest("put sack in box");
-        showTest("put box in bowl");
-        showTest("put sack in bowl");
-        showTest("put carrot in box");
-        showTest("i");
-        showStr("---END TEST---");
 
-    }
-    // Test..... END
 
 }
