@@ -3,12 +3,8 @@ package game;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.*;     // required for ArrayList
-import gameobjects.Actor;
-import gameobjects.ContainerThing;
-import gameobjects.Room;
-import gameobjects.Thing;
-import gameobjects.ThingList;
-import gameobjects.Treasure;
+
+import gameobjects.*;
 import globals.Dir;
 import globals.ThingAndThingHolder;
 
@@ -33,6 +29,7 @@ public class Game implements java.io.Serializable {
         ThingList forestList = new ThingList("forestList");
         ThingList caveList = new ThingList("caveList");
         ThingList dungeonList = new ThingList("dungeonList");
+        ThingList rainbowList = new ThingList("rainbowList");
         ThingList playerList = new ThingList("playerList");
         ThingList traderList = new ThingList("traderList");
         ThingList sackList = new ThingList("sackList");
@@ -45,6 +42,7 @@ public class Game implements java.io.Serializable {
         Room cave = new Room();
         Room shed = new Room();
         Room dungeon = new Room();
+        Room rainbow = new Room();
         Room sack = new Room();
         Room chest = new Room();
 
@@ -54,19 +52,24 @@ public class Game implements java.io.Serializable {
         Treasure inSack = new Treasure("bone", "a crisp bone", 10, sack);
 
         ContainerThing chestContainer = new ContainerThing("chest", " sparkly, shiny chest", false, true,true, false, chestList, trollRoom);
-        Treasure inChest = new Treasure("coins", "shiny gold coins", 25, chest);
+        Treasure coins1 = new Treasure("coins", "shiny gold coins", 25, chest);
+        Treasure coins3 = new Treasure("coins", "shiny gold coins", 25, trollRoom);
+        Treasure coins2 = new Treasure("coins", "shiny gold coins", 50, chest);
 
         trollRoomList.add(new Treasure("carrot", "It is a very crunchy carrot", 1, trollRoom));
         trollRoomList.add(new Thing("tree", "It is a very big tree", false, false, trollRoom));
         trollRoomList.add(sackCont);
         trollRoomList.add(chestContainer);
+        trollRoomList.add(coins3);
         trollRoomList.add(new ContainerThing("bowl", "a brass bowl", true, true, false, true, new ThingList("bowlList"), trollRoom));
         trollRoomList.add(new ContainerThing("box", "a cardboard box", true, true, true, true, new ThingList("boxList"), trollRoom));
+
 
         traderList.add(gameBoy);
         traderList.add(traderTest);
 
-        chestList.add(inChest);
+        chestList.add(coins1);
+        chestList.add(coins2);
 
         sackList.add(inSack);
 
@@ -81,19 +84,19 @@ public class Game implements java.io.Serializable {
         
         // Map:
         //
-        // Troll Room --- Forest 
-        //   | 
-        // Cave --------- Shed 
-        //  | 
-        //  V 
-        // Dungeon
-        //                 Room( name,   description,              N,        S,      W,      E,  [Up], [Down])
+        //                                                              Troll Room --- Forest
+        //                                                                |
+        //                                                              Cave --------- Shed
+        //                                                               |
+        //                                                              V
+        //Rainbow room ---------Dungeon
+        //                 Room( name,   description,                                                                                                               N,        S,      W,      E,  [Up], [Down])
         trollRoom.init("Troll Room", "A dank room that smells of troll", null, cave, null, forest, null, null, trollRoomList);
         forest.init("Forest", "A leafy woodland", null, null, trollRoom, null, null, null, forestList);
-        cave.init("Cave", "A dismal cave with walls covered in luminous moss", trollRoom, null, null, shed, null, dungeon, caveList);
+        cave.init("Cave", "A dismal cave with walls covered in luminous moss. It looks like there may be a hole in the ground. Try going `down`", trollRoom, null, null, shed, null, dungeon, caveList);
         shed.init("Shed", "An old, wooden shed", null, null, cave, null, null, null, new ThingList("shedList"));
-        dungeon.init("Dungeon", "A nasty, dark cell", null, null, null, null, cave, null, new ThingList("dungeonList"));
-
+        dungeon.init("Dungeon", "A nasty, dark cell", null, null, rainbow, null, cave, null, new ThingList("dungeonList"));
+        rainbow.init("Rainbow", "A extremely shiny room that smells strangely of flowers. You notice a strange figure in the corner", null, null, null, dungeon, null, null, rainbowList);
         map.add(trollRoom);
         map.add(forest);
         map.add(cave);
@@ -103,7 +106,8 @@ public class Game implements java.io.Serializable {
         // create player and set location
         player = new Actor("player", "a loveable game-player", playerList, trollRoom);
 
-        trader = new Actor("trader", "has his knee bandaged. I wonder why?", traderList, trollRoom);
+        trader = new Actor("merchant", "has his knee bandaged. I wonder why?", traderList, rainbow);
+        rainbowList.add(trader);
     }
 
     // access methods     
@@ -116,18 +120,49 @@ public class Game implements java.io.Serializable {
     public String playerTalkTo(String npc)
     {
         String s;
+
         if (trader.getName().equals(npc))
         {
-            System.out.println("Ah hello see my wares:");
-            s = "I hope you enjoy what you see";
-            showInventory(npc);
-            return s;
+            if (trader.getLocation() == player.getLocation())
+            {
+                System.out.println("Ah hello see my wares:");
+                s = "I hope you enjoy what you see";
+                showInventory(npc);
+                return s;
+            } else {
+                s = "Cannot see trader here";
+                return s;
+            }
 
         } else {
             s = "(npc not implemented yet)";
             return s;
         }
     }
+
+
+    /*
+    public String use(String cartridge, String obname)
+    {
+        String s;
+        ThingAndThingHolder t_th = player.isThingInInventory(cartridge);
+        ThingHolder th;
+        ThingList tl;
+        Thing t;
+        if (t_th == null)
+        {
+            s = "you do not have the " + cartridge + " to use on the " + obname;
+            return s;
+        }
+        th = t_th.getThingHolder();
+
+        tl = th.getThings();
+        System.out.println(tl.get(0).getName());
+        s = "test";
+        return s;
+    }
+
+     */
 
 
     public String  play (String obname)
@@ -239,17 +274,25 @@ public class Game implements java.io.Serializable {
         ThingAndThingHolder t_th;
         ThingList tl;
         Thing t;
+        t_th = trader.isThingHere(obname);
+        t = t_th.getThing();
         if (npc.equals(trader.getName()))
         {
-            t_th = trader.isThingHere(obname);
-            t = t_th.getThing();
-            if (t.isTakable())
+            if (trader.getLocation() == player.getLocation())
             {
-                trader.drop(obname);
-                player.take(obname);
-                s = "you buy the " + obname + " from the " + trader.getName();
-                return s;
+                if (t instanceof Treasure && player.coins >= ((Treasure) t).getValue())
+                {
+                    player.coins -= ((Treasure) t).getValue();
+                    trader.drop(obname);
+                    player.take(obname);
+                    s = "you buy the " + obname + " from the " + trader.getName();
+                    return s;
+                } else {
+                    s = "You do not have the correct amount of coins to buy " + obname + ", the cost is: " + ((Treasure) t).getValue();
+                    return s;
+                }
             } else {
+                s = "You cannot see the " + trader.getName() + " here";
                 return s;
             }
 
