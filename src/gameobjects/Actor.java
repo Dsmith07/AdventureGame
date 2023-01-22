@@ -32,7 +32,7 @@ public class Actor extends ThingHolder implements java.io.Serializable {
         s = describeThings();
 
         if (s.isEmpty()) {
-            s = "nothing";
+            s = "coins: 0 coins\nnothing";
         }
         if (getName().equals("player"))
         {
@@ -246,6 +246,7 @@ public class Actor extends ThingHolder implements java.io.Serializable {
                 if (th instanceof ContainerThing) {
                      s = "You take the " + obname + " from the " + th.getName();
                      coins += ((Treasure) t).getValue();
+
                      if (AdventureGame.game.player.isThingInInventory(obname) != null)
                      {
                          tl.remove(t);

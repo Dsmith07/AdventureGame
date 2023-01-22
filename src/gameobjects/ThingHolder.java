@@ -1,6 +1,9 @@
 package gameobjects;
 
+import game.AdventureGame;
 import globals.ThingAndThingHolder;
+
+import java.util.Objects;
 
 public class ThingHolder extends Thing implements java.io.Serializable {
 
@@ -67,7 +70,7 @@ public class ThingHolder extends Thing implements java.io.Serializable {
         ThingList tlist = th.getThings();
         ContainerThing container;
         String npcName;
-        
+
         for (Thing t : tlist) {
             String containerName = "";
             if (t.getContainer() instanceof ContainerThing) {
@@ -75,12 +78,21 @@ public class ThingHolder extends Thing implements java.io.Serializable {
             }
             if (t instanceof Treasure && !(t.getContainer() instanceof Room))
             {
-                int value = ((Treasure) t).getValue();
-                String coinsCoin;
-                coinsCoin = (value > 1) ? ("coins"):("coin");
-                thingStr += t.getName() + containerName + ": "+value + " " + coinsCoin + "\n";
-            }else
-            {
+                if (t.getName().equals("coins"))
+                {
+
+                    int value = AdventureGame.game.player.coins;
+                    String coinsCoin;
+                    coinsCoin = (value > 1 || value == 0) ? ("coins"):("coin");
+                    thingStr += t.getName() + containerName + ": "+ value + " " + coinsCoin + "\n";
+
+                } else {
+                    int value = ((Treasure) t).getValue();
+                    String coinsCoin;
+                    coinsCoin = (value > 1 || value == 0) ? ("coins"):("coin");
+                    thingStr += t.getName() + containerName + ": "+ value + " " + coinsCoin + "\n";
+                }
+            }else {
                 thingStr += t.getName() + containerName + "\n";
             }
 
@@ -130,5 +142,7 @@ public class ThingHolder extends Thing implements java.io.Serializable {
         toTH.add(t);
         t.setContainer(toTH);
     }
+
+
 
 }
