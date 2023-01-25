@@ -41,11 +41,61 @@ public class The_Self_Proclaimed_Giant {
                                 System.out.println("Ending:\n       The Outlaw");
                             }
                             else {
-                                System.out.println();
+                                System.out.println("You get down on the ground and a sometime passes");
+                                System.out.println("You and your case is pending which lawyer do you hire");
+                                System.out.println("1. J.D. Bronner.\n2. Slippin Jimmy.");
+                                int option7A = scan.nextInt();
+                                if (option7A == 1){
+                                    System.out.println("You hire Bronner since his name is more normal");
+                                    System.out.println("You go to court and your defense was terrible");
+                                    System.out.println("A witness reports that out of no where you hit the victim with the force of a thousand suns");
+                                    System.out.println("You are found guilty of several counts of attempted murder and charges of assault");
+                                    System.out.println("When you arrive to your new home prison what do you do");
+                                    System.out.println("1. Rise to be on top.\n2. Live a quietly");
+                                    int option8A = scan.nextInt();
+                                    if (option8A == 1){
+                                        System.out.println("You want to be top dog in this prison world");
+                                        System.out.println("You make connections in short time");
+                                        System.out.println("After sometime you have 2 ideal options");
+                                        System.out.println("1. Challenge the current leader of the gangs.\n2. Continue to gather power and favor.");
+                                        int option9A = scan.nextInt();
+                                        if (option9A == 1){
+                                            System.out.println("You challenge the leader to a fight");
+                                            System.out.println("He laughs saying you aren't strong enough to win");
+                                            System.out.println("You get surrounded and he charges you");
+                                            System.out.println("How do you respond\n1. Jump out of the way and counter.\n2. Challenge the charge.");
+                                            int option10A = scan.nextInt();
+                                            if (option10A == 1){
+                                                System.out.println("You leap out of the way knowing the charge was a faint");
+                                                System.out.println();
+                                            }
+                                            else {
+                                                System.out.println("You challenge the charge with your own");
+                                                System.out.println("He pushes you to the ground and bets you until lights out");
+                                                System.out.println("Ending:\n       The Knock Out");
+                                            }
+                                        }
+                                        else {
+                                            System.out.println("You continue to gather power and favor");
+                                            System.out.println("Your group becomes the most powerful");
+                                            System.out.println("You easily take control and live with the power");
+                                            System.out.println("Ending:\n       The Top Pug");
+                                        }
+                                    }
+                                    else {
+                                        System.out.println("You try to keep your head down and keep to yourself");
+                                        System.out.println("You manage to just get by thanks to paying for protection");
+                                        System.out.println("And you gain favor with guards by ratting out others");
+                                        System.out.println("Ending:\n       Obedient Prisoner");
+                                    }
+                                }
+                                else {
+
+                                }
                             }
                         }
                         else {
-
+                            System.out.println("You keep talking leading to");
                         }
                     }
                     else{
