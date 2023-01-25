@@ -67,7 +67,16 @@ public class The_Self_Proclaimed_Giant {
                                             int option10A = scan.nextInt();
                                             if (option10A == 1){
                                                 System.out.println("You leap out of the way knowing the charge was a faint");
-                                                System.out.println();
+                                                System.out.println("You successfully countered and hit him hard");
+                                                System.out.println("He isn't down and he goes for a powerful swing");
+                                                System.out.println("How do you react\n1. Block his attack.\n2. Dodge with your life on the line.");
+                                                int option11A = scan.nextInt();
+                                                if (option11A == 1){
+                                                
+                                                }
+                                                else {
+                                                
+                                                }
                                             }
                                             else {
                                                 System.out.println("You challenge the charge with your own");
@@ -90,7 +99,7 @@ public class The_Self_Proclaimed_Giant {
                                     }
                                 }
                                 else {
-
+                                System.out.println("You hired Slippin jimmy");
                                 }
                             }
                         }
