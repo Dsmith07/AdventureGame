@@ -240,7 +240,7 @@ class Tetris extends JPanel {
     }
 
     public static void main(String[] args) {
-        JFrame f = new JFrame("Tetris");
+        JFrame f = new JFrame("Ancient Relic");
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         f.setSize(12*26+10, 26*23+25);
         final Tetris game = new Tetris();

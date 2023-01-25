@@ -22,6 +22,10 @@ public class Parser {
         vocab.put("coins", WT.NOUN);
         vocab.put("door", WT.NOUN);
         vocab.put("dust", WT.NOUN);
+        vocab.put("ring", WT.NOUN);
+        vocab.put("wombat", WT.NOUN);
+        vocab.put("strangebook", WT.NOUN);
+        vocab.put("dirtybook", WT.NOUN);
         vocab.put("gardenia", WT.NOUN);
         vocab.put("key", WT.NOUN);
         vocab.put("knife", WT.NOUN);
@@ -43,6 +47,8 @@ public class Parser {
         vocab.put("from", WT.PREPOSITION);
         vocab.put("trader", WT.NOUN);
         vocab.put("merchant", WT.NOUN);
+        vocab.put("ancientbook", WT.NOUN);
+        vocab.put("wizard", WT.NOUN);
         vocab.put("shop", WT.VERB);
         vocab.put("lol", WT.NOUN);
         vocab.put("get", WT.VERB);
@@ -50,6 +56,7 @@ public class Parser {
         vocab.put("inventory", WT.VERB);
         vocab.put("play", WT.VERB);
         vocab.put("take", WT.VERB);
+        vocab.put("read", WT.VERB);
         vocab.put("talk", WT.VERB);
         vocab.put("use", WT.VERB);
         vocab.put("tetris", WT.NOUN);
@@ -57,6 +64,8 @@ public class Parser {
         vocab.put("drop", WT.VERB);
         vocab.put("put", WT.VERB);
         vocab.put("l", WT.VERB);
+        vocab.put("secretchest", WT.NOUN);
+        vocab.put("cartridge", WT.NOUN);
         vocab.put("look", WT.VERB);
         vocab.put("open", WT.VERB);
         vocab.put("close", WT.VERB);
@@ -103,12 +112,9 @@ public class Parser {
                 case "buyfrom":
                     msg = AdventureGame.game.buy(wt2.getWord(), wt4.getWord());
                     break;
-                    /*
                 case "useon":
                     msg = AdventureGame.game.use(wt2.getWord(), wt4.getWord());
                     break;
-
-                     */
                 default:
                     msg = "I don't know how to " + wt.getWord() + " " + wt2.getWord() + " " + wt3.getWord() + " " + wt4.getWord() + "!";
                     break;
@@ -173,6 +179,9 @@ public class Parser {
                     break;
                 case "play":
                     msg = AdventureGame.game.play(wt2.getWord());
+                    break;
+                case "read":
+                    msg = AdventureGame.game.read(wt2.getWord());
                     break;
                 default:
                     msg += " (not yet implemented)";

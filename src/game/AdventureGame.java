@@ -1,18 +1,20 @@
 package game;
 
+import audio.SoundPlayerUsingClip;
 import game.Game;
 import gameobjects.Treasure;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import java.io.*;
+import java.util.Objects;
 
 public class AdventureGame {
 
+
+
+    public static SoundPlayerUsingClip sp = new SoundPlayerUsingClip();
     public static Game game;
     public static Treasure treasure;
 
@@ -44,6 +46,10 @@ public class AdventureGame {
         }
     }
 
+
+
+
+
     public static void main(String[] args) throws IOException {
         BufferedReader in;
         String input;
@@ -51,6 +57,7 @@ public class AdventureGame {
         game = new Game();
         in = new BufferedReader(new InputStreamReader(System.in));
         game.showIntro();
+        sp.playSound("music.wav");
         do {
             System.out.print("\u001b[38;5;93m~\u001b[38;5;231m ");
             input = in.readLine();
