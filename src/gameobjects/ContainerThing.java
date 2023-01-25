@@ -63,7 +63,8 @@ public class ContainerThing extends ThingHolder implements java.io.Serializable 
                 s = "The " + getName() + " is already open.";
             } else {
                 isopen = true;
-                s = "You open the " + getName();
+                s = "You open the " + getName() + "\n" + "Things inside of the " + getName() + ":\n" + describeThings();
+
             }
         }
         return s;

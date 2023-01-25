@@ -26,4 +26,8 @@ public class Treasure extends Thing implements java.io.Serializable{
         return value;
     }
 
+    public void setValue(int value) {
+        this.value = value;
+    }
+
 }

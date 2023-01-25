@@ -6,6 +6,10 @@ import globals.ThingAndThingHolder;
 
 import java.util.concurrent.atomic.AtomicReference;
 
+/*
+TODO: ADD HEALTH AND MAKE MONSTERS, WEAPONS, DAMAGE
+ */
+
 public class Actor extends ThingHolder implements java.io.Serializable {
     public int coins = 0;
     //  private Room location; // the Room where the Person is at present
@@ -82,6 +86,10 @@ public class Actor extends ThingHolder implements java.io.Serializable {
             if (t == null) {
                 s = "There is no " + obname + " here!";
             } else {
+                if (t instanceof ContainerThing && t.getName().equals("chest"))
+                {
+                    AdventureGame.sp.playSound("closechest.wav");
+                }
                 s = t.close();
             }
         }
@@ -101,6 +109,13 @@ public class Actor extends ThingHolder implements java.io.Serializable {
             if (t == null) {
                 s = "There is no " + obname + " here!";
             } else {
+                if (t.getName().equals("sack"))
+                {
+                    AdventureGame.sp.playSound("bag.wav");
+                } else {
+                    AdventureGame.sp.playSound("open.wav");
+                }
+
                 s = t.open();
             }
         }
@@ -218,6 +233,10 @@ public class Actor extends ThingHolder implements java.io.Serializable {
                 s = "You can't put the " + obname + " into the " + containername
                         + "\nbecause the " + containername + " is already in the " + obname + "!";
             } else {
+                if(container.getName().equals("sack"))
+                {
+                    AdventureGame.sp.playSound("intosack.wav");
+                }
                 transferOb(t, t_th.getThingHolder(), container);
                 s = "You put the " + obname + " into the " + containername + ".";
             }
@@ -240,6 +259,7 @@ public class Actor extends ThingHolder implements java.io.Serializable {
                 s = "Can't see " + obname + " here.";
                 return s;
             } else {
+                AdventureGame.sp.playSound("coin.wav");
                 t = t_th.getThing();
                 tl = t_th.getList();
                 th = t_th.getThingHolder();
@@ -268,11 +288,6 @@ public class Actor extends ThingHolder implements java.io.Serializable {
 
         }
 
-        if (obname.equals("merchant"))
-        {
-            s = "Cannot take " + obname;
-            return s;
-        }
 
         t_th = isThingHere(obname);
         if (t_th == null) {
@@ -282,10 +297,19 @@ public class Actor extends ThingHolder implements java.io.Serializable {
             tl = t_th.getList();
             th = t_th.getThingHolder();
 
+            if (t instanceof Actor)
+            {
+                AdventureGame.sp.playSound("error.wav");
+                s = "Cannot take " + obname;
+                return s;
+            }
+
             if (tl == this.getThings()) {
+                AdventureGame.sp.playSound("error.wav");
                 s = "You already have the " + obname;
             } else {
                 if (t.isTakable()) {
+                    AdventureGame.sp.playSound("take.wav");
                     transferOb(t, th, this);
                     if (th instanceof ContainerThing) {
                         s = "You take the " + obname + " from the " + th.getName();
@@ -293,6 +317,7 @@ public class Actor extends ThingHolder implements java.io.Serializable {
                         s = obname + " taken!";
                     }
                 } else {
+                    AdventureGame.sp.playSound("error.wav");
                     s = "You can't take the " + t.getName() + "!";
                 }
             }
@@ -309,6 +334,10 @@ public class Actor extends ThingHolder implements java.io.Serializable {
         if (t_th == null) {
             s = "You don't appear to have the " + obname + ".";
         } else {
+            if (t_th.getThingHolder().getName().equals("player"))
+            {
+                AdventureGame.sp.playSound("drop.wav");
+            }
             t = t_th.getThing();
             transferOb(t, t_th.getThingHolder(), this.getLocation());
             s = obname + " dropped!";
