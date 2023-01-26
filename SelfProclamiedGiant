@@ -3,9 +3,9 @@ public class The_Self_Proclaimed_Giant {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         System.out.println("The Self Proclaimed Giant\nBy: Benjamin Bowman");
-        System.out.println("\nDo you wish to continue");
+        System.out.println("Do you wish to continue");
         String question = scan.next().toLowerCase();
-        if (question == "y" || question == "yes"){
+        if (question.equals("y") || question.equals("yes")){
             System.out.print("You are born a dwarf you travel far and wide in hopes someone is shorter than you");
             System.out.print(" with no hope in sight you have 2 options\n1. Give up and except your height." +
                     "\n2. Refuse and live a lie.\n");
@@ -107,6 +107,7 @@ public class The_Self_Proclaimed_Giant {
                                         }
                                     }
                                     else {
+
                                         System.out.println("You hired Slippin jimmy");
                                         System.out.println("He tells you he is the best around");
                                         System.out.println("During the trial he fights tooth and nail no trick is to much");
@@ -121,7 +122,19 @@ public class The_Self_Proclaimed_Giant {
                                 System.out.println("More and more dates and eventually marriage");
                                 System.out.println("Do you find yourself happy in this life");
                                 System.out.println("1. Yes I am happy.\n2. No.");
-                                
+                                int option12A = scan.nextInt();
+                                if (option12A == 1) {
+                                    System.out.println("You feel happy with the life you made with superior height");
+                                    System.out.println("You go to hug your wife but all of a sudden you shrink back to being a dwarf");
+                                    System.out.println("She sees you and screams that you were lying and were secretly 5'3 or shorter");
+                                    System.out.println("Ending:\n       Dwarf Out The Bag");
+                                }
+                                else{
+                                    System.out.println("No you can do better in life and be happier");
+                                    System.out.println("you pack everything you can and run");
+                                    System.out.println("In hopes of a life that is far better than current");
+                                    System.out.println("Ending:\n       Free Dwarf");
+                                }
                             }
                         }
                         else{
@@ -138,7 +151,11 @@ public class The_Self_Proclaimed_Giant {
                     }
                 }
                 else{
-                    System.out.println("");
+                    System.out.println("You yell and do your picture day smile to impress her");
+                    System.out.println("She pretends to speak a different language");
+                    System.out.println("You get upset following why a person comes up and turns out its her translator");
+                    System.out.println("She wasn't pretending and you feel super bad and decide to leave the mall");
+                    System.out.println("Ending:\n       Short On Communication");
                 }
             }
             else{
