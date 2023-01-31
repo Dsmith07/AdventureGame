@@ -21,6 +21,7 @@ public class The_Self_Proclaimed_Giant {
                     System.out.println("After some chit chat you ask why she approached you she says because you aren't short.");
                     System.out.println("Not being completely use your new height how do you respond.");
                     System.out.println("1. Act Cool.\n2. Become greatly upset and offended.");
+                    System.out.println("3. Just walk away.");
                     int option3A = scan.nextInt();
                     if (option3A == 1){
                         System.out.println("You act cool about what she said and continue talking.");
@@ -34,7 +35,7 @@ public class The_Self_Proclaimed_Giant {
                             System.out.println("How do you react\n1. Slap her and run out.\n2. Keep talking with her.");
                             int option5A = scan.nextInt();
                             if (option5A == 1) {
-                                System.out.println("You hit her with the force of a thousand suns and sprint faster then humanly possibly.");
+                                System.out.println("You hit her with the force of a thousand suns and sprint faster than humanly possible.");
                                 System.out.println("You are chased down by the law enforcement and they tell you to give up.");
                                 System.out.println("What do you do\n1. Keep fighting.\n2. Give up.");
                                 int option6A = scan.nextInt();
@@ -44,17 +45,17 @@ public class The_Self_Proclaimed_Giant {
                                     System.out.println("Ending:\n       The Outlaw");
                                 }
                                 else {
-                                    System.out.println("You get down on the ground and a sometime passes.");
-                                    System.out.println("You and your case is pending which lawyer do you hire.");
+                                    System.out.println("You get down on the ground and sometime passes.");
+                                    System.out.println("You and your case are pending which lawyer do you hire.");
                                     System.out.println("1. J.D. Bronner.\n2. Slippin Jimmy.");
                                     int option7A = scan.nextInt();
                                     if (option7A == 1){
                                         System.out.println("You hire Bronner since his name is more normal.");
                                         System.out.println("You go to court and your defense was terrible.");
-                                        System.out.println("A witness reports that out of no where you hit the victim with the force of a thousand suns.");
+                                        System.out.println("A witness reports that out of nowhere you hit the victim with the force of a thousand suns.");
                                         System.out.println("You are found guilty of several counts of attempted murder and charges of assault.");
                                         System.out.println("When you arrive to your new home prison what do you do.");
-                                        System.out.println("1. Rise to be on top.\n2. Live a quietly");
+                                        System.out.println("1. Rise to be on top.\n2. Live quietly");
                                         int option8A = scan.nextInt();
                                         if (option8A == 1){
                                             System.out.println("You want to be top dog in this prison world.");
@@ -131,23 +132,30 @@ public class The_Self_Proclaimed_Giant {
                                 }
                                 else{
                                     System.out.println("No you can do better in life and be happier.");
-                                    System.out.println("you pack everything you can and run.");
+                                    System.out.println("You pack everything you can and run.");
                                     System.out.println("In hopes of a life that is far better than current.");
                                     System.out.println("Ending:\n       Free Dwarf");
                                 }
                             }
                         }
                         else{
-                            System.out.println("You think it was funny but bragging about it lead to you being disliked.");
-                            System.out.println("No more people and came up to talk to you now you will leave lonely.");
+                            System.out.println("You think it was funny but bragging about it led to you being disliked.");
+                            System.out.println("No more people and came up to talk to you leading you to live lonely..");
                             System.out.println("Ending:\n       Short Lived Compassion");
                         }
                     }
                     else {
+                        if (option3A == 2){
                         System.out.println("You scream and yell how it isn't fair to other short people.");
-                        System.out.println("you bust down into tears and curl up into a ball.");
+                        System.out.println("You burst down into tears and curl up into a ball.");
                         System.out.println("Screaming to people to get away the girl runs away calling you a freak.");
                         System.out.println("Ending:\n       Short Tempered Freak");
+                        }
+                        else{
+                        Xavier Cruz put duck song he waddled away here please
+                            System.out.println("You decide its to much pressure so you turn around and just leave");
+                            System.out.println("Ending:\n       Waddled Away");
+                        }
                     }
                 }
                 else{
@@ -169,10 +177,11 @@ public class The_Self_Proclaimed_Giant {
                     System.out.print(" scouted by a scout from the 67ers do you.\n1. Join.\n2. Reject.\n");
                     int option3B = scan.nextInt();
                     if (option3B == 1){
-                        System.out.println("You accept and now your a pro you hope someone will look up to you.");
+                        System.out.println("You accept and now you're a pro you hope someone will look up to you.");
                         System.out.println("You make strides as a pro with no-one being any wiser about your height.");
-                        System.out.print("when you are about to make a dunk you feel your shoes start to fall off.");
+                        System.out.print("When you are about to make a dunk you feel your shoes start to fall off");
                         System.out.print(" how do you react\n1. Avoid the dunk and fix your shoes.\n2. Do nothing and complete the dunk.\n");
+                        System.out.println("3. The unrealistic attempt");
                         int option4B = scan.nextInt();
                         if (option4B == 1){
                             System.out.println("With you fixing your shoes you throw the chances of winning.");
@@ -181,10 +190,19 @@ public class The_Self_Proclaimed_Giant {
                             System.out.println("Ending:\n       Faulty Shoes");
                         }
                         else{
-                            System.out.print("You did it you made the dunk but everyone is silent");
-                            System.out.print(" you are shunned not only are you short but you lied.");
-                            System.out.print("\nYou were fired and thrown out on the streets left to fend for yourself\n");
-                            System.out.println("Ending:\n       Liar Exposed");
+                            if (option4B == 2) {
+                                System.out.print("You did it you made the dunk but everyone is silent");
+                                System.out.print(" you are shunned not only are you short but you lied.");
+                                System.out.print("\nYou were fired and thrown out on the streets left to fend for yourself\n");
+                                System.out.println("Ending:\n       Liar Exposed");
+                            }
+                            else{
+                                System.out.println("You had no other choice you complete it and try your hardest to grab your shoes.");
+                                System.out.println("You somehow even with the low odds you save it from falling.");
+                                System.out.println("On completion the crowd goes wild your team cheers with glee.");
+                                System.out.println("What you did became a well know move known as the Jumping Jordan.");
+                                System.out.println("Ending:\n       Liar Reigns Victorious");
+                            }
                         }
                     }
                     else{
@@ -230,7 +248,7 @@ public class The_Self_Proclaimed_Giant {
                                 int option8B = scan.nextInt();
                                 if (option8B == 1){
                                     System.out.println("You deny the offer and you decided to follow what you felt passionate about.");
-                                    System.out.println("You start a business were it teaches youth how to code.");
+                                    System.out.println("You start a business where it teaches youth how to code.");
                                     System.out.println("Thanks to all of your hard work Prophet institute recognizes you.");
                                     System.out.println("This is your biggest and proudest moment.");
                                     System.out.println("Ending:\n       Short Pride");
@@ -238,7 +256,7 @@ public class The_Self_Proclaimed_Giant {
                                 else{
                                     System.out.println("The offer was accepted after sometime working you felt burnt out.");
                                     System.out.println("With being burnt out you realized this job was meant to trap you.");
-                                    System.out.println("It sucked away what made you special.....\nyou realise height never mattered but it was to late");
+                                    System.out.println("It sucked away what made you special.....\nyou realize height never mattered but it was too late");
                                     System.out.println("Ending:\n       Short Lived Will");
                                 }
                             }
@@ -252,7 +270,7 @@ public class The_Self_Proclaimed_Giant {
                         else{
                             System.out.println("You wrong yet you were so confident you tried answering again but wrong again.");
                             System.out.println("The teacher says to everyone this is what happens when you don't pay attention.");
-                            System.out.println("You feel great shame greater then that of your low height you run out of the class.");
+                            System.out.println("You feel great shame greater than that of your low height you run out of the class.");
                             System.out.println("While your class mates laughed at you leading to you never returning.");
                             System.out.println("Ending:\n       Short Lived Potential");
                         }
